@@ -1,5 +1,6 @@
 const mammoth = require('mammoth');
 const TurndownService = require('turndown');
+const { tables } = require('turndown-plugin-gfm');
 const fs = require('fs');
 const path = require('path');
 
@@ -8,6 +9,9 @@ const turndownService = new TurndownService({
   bulletListMarker: '-',
   codeBlockStyle: 'fenced'
 });
+
+// 启用表格支持
+turndownService.use(tables);
 
 async function convertWordToFormat(inputPath, outputDir, imagesDir, format, originalName) {
   const imageMap = new Map();
