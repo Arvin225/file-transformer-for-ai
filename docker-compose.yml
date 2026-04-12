@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  file-transformer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: file-transformer-for-ai
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    # 如需持久化上传的文件，可开启以下挂载
+    # volumes:
+    #   - ./uploads:/app/uploads
