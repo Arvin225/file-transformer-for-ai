@@ -43,6 +43,10 @@ function uploadFile(file) {
     return;
   }
 
+  // 获取选择的格式
+  const format = document.querySelector('input[name="format"]:checked').value;
+  const ext = format === 'html' ? '.html' : '.md';
+
   // 显示进度
   dropZone.classList.add('hidden');
   progressArea.classList.remove('hidden');
@@ -50,6 +54,7 @@ function uploadFile(file) {
 
   const formData = new FormData();
   formData.append('file', file);
+  formData.append('format', format);
 
   fetch('/convert', {
     method: 'POST',
@@ -68,7 +73,7 @@ function uploadFile(file) {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = file.name.replace(/\.docx?$/i, '.zip');
+    a.download = file.name.replace(/\.docx?$/i, ext);
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);

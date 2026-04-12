@@ -9,7 +9,18 @@
 <body>
   <div class="container">
     <h1>Word 转 Markdown 转换器</h1>
-    <p class="subtitle">将 Word 文档转换为 AI 友好的 Markdown 格式</p>
+    <p class="subtitle">将 Word 文档转换为 AI 友好的格式</p>
+    
+    <div class="format-selector">
+      <label class="format-option">
+        <input type="radio" name="format" value="markdown" checked>
+        <span>Markdown</span>
+      </label>
+      <label class="format-option">
+        <input type="radio" name="format" value="html">
+        <span>HTML</span>
+      </label>
+    </div>
     
     <div class="upload-area" id="dropZone">
       <input type="file" id="fileInput" accept=".docx,.doc" hidden>
