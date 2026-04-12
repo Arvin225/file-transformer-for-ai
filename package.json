@@ -2,19 +2,21 @@
   "name": "file-transformer-for-ai",
   "version": "1.0.0",
   "description": "Made the file better for ai",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "archiver": "^7.0.1",
+    "csv-parser": "^3.2.0",
     "express": "^5.2.1",
     "jsdom": "^29.0.2",
     "jszip": "^3.10.1",
     "mammoth": "^1.12.0",
     "multer": "^2.1.1",
-    "turndown": "^7.2.4"
+    "turndown": "^7.2.4",
+    "xlsx": "^0.18.5"
   },
   "repository": {
     "type": "git",

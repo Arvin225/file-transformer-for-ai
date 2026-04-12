@@ -2,9 +2,36 @@ const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');
 const progressArea = document.getElementById('progressArea');
 const resultArea = document.getElementById('resultArea');
+const formatRadios = document.querySelectorAll('input[name="format"]');
+
+// 格式配置
+const formatConfig = {
+  'word-md': { accept: '.docx,.doc', ext: '.md', name: 'Word' },
+  'word-html': { accept: '.docx,.doc', ext: '.html', name: 'Word' },
+  'excel-md': { accept: '.xlsx,.xls', ext: '.md', name: 'Excel' },
+  'csv-md': { accept: '.csv', ext: '.md', name: 'CSV' }
+};
 
 // 点击上传
 dropZone.addEventListener('click', () => fileInput.click());
+
+// 格式切换时更新文件输入框
+formatRadios.forEach(radio => {
+  radio.addEventListener('change', updateFileInput);
+});
+
+function updateFileInput() {
+  const format = document.querySelector('input[name="format"]:checked').value;
+  const config = formatConfig[format];
+  fileInput.accept = config.accept;
+  
+  // 更新提示文字
+  const fileTypesText = document.querySelector('.file-types');
+  fileTypesText.textContent = `支持 ${config.accept} 格式`;
+}
+
+// 初始化
+updateFileInput();
 
 // 文件选择
 fileInput.addEventListener('change', handleFile);
@@ -37,15 +64,17 @@ function handleFile(e) {
 }
 
 function uploadFile(file) {
-  // 验证文件类型
-  if (!file.name.match(/\.(docx|doc)$/i)) {
-    alert('请上传 Word 文件 (.docx 或 .doc)');
+  // 获取选择的格式并验证文件类型
+  const format = document.querySelector('input[name="format"]:checked').value;
+  const config = formatConfig[format];
+  
+  const extPattern = config.accept.replace(/,/g, '|').replace(/\./g, '\\.');
+  const regex = new RegExp(`(${extPattern})$`, 'i');
+  
+  if (!file.name.match(regex)) {
+    alert(`请上传 ${config.name} 文件 (${config.accept})`);
     return;
   }
-
-  // 获取选择的格式
-  const format = document.querySelector('input[name="format"]:checked').value;
-  const ext = format === 'html' ? '.html' : '.md';
 
   // 显示进度
   dropZone.classList.add('hidden');
@@ -66,14 +95,21 @@ function uploadFile(file) {
         throw new Error(data.error || '转换失败');
       });
     }
-    return response.blob();
+    // 从响应头获取文件名
+    const disposition = response.headers.get('content-disposition');
+    let filename = file.name.replace(/\.[^/.]+$/, config.ext);
+    if (disposition && disposition.includes('filename=')) {
+      const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+      if (match) filename = match[1].replace(/['"]/g, '');
+    }
+    return response.blob().then(blob => ({ blob, filename }));
   })
-  .then(blob => {
+  .then(({ blob, filename }) => {
     // 下载文件
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = file.name.replace(/\.docx?$/i, ext);
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
