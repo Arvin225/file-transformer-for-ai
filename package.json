@@ -1,0 +1,31 @@
+{
+  "name": "file-transformer-for-ai",
+  "version": "1.0.0",
+  "description": "Made the file better for ai",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "express": "^5.2.1",
+    "jsdom": "^29.0.2",
+    "jszip": "^3.10.1",
+    "mammoth": "^1.12.0",
+    "multer": "^2.1.1",
+    "turndown": "^7.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arvin225/file-transformer-for-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Arvin225/file-transformer-for-ai/issues"
+  },
+  "homepage": "https://github.com/Arvin225/file-transformer-for-ai#readme"
+}
