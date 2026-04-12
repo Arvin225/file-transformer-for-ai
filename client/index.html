@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Word 转 Markdown 转换器</title>
+  <title>AI 文档转换器</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Word 转 Markdown 转换器</h1>
-    <p class="subtitle">将文档转换为 AI 友好的格式</p>
+    <h1>AI 文档转换器</h1>
+    <p class="subtitle">将文档转换为 AI 友好的 Markdown/HTML 格式</p>
     
     <div class="format-selector">
       <label class="format-option">
@@ -38,8 +38,8 @@
           <polyline points="17 8 12 3 7 8"/>
           <line x1="12" y1="3" x2="12" y2="15"/>
         </svg>
-        <p>拖拽 Word 文件到此处，或 <span class="highlight">点击上传</span></p>
-        <p class="file-types">支持 .docx, .doc 格式</p>
+        <p>拖拽文件到此处，或 <span class="highlight">点击上传</span></p>
+        <p class="file-types" id="fileTypeHint">支持 .docx, .doc 格式</p>
       </div>
     </div>
 
@@ -61,16 +61,6 @@
       <p class="download-info">文件将自动下载</p>
     </div>
 
-    <div class="features">
-      <h3>支持转换的内容</h3>
-      <ul>
-        <li>标题层级 (H1-H6)</li>
-        <li>文本格式 (加粗、斜体)</li>
-        <li>有序/无序列表</li>
-        <li>图片 (自动提取)</li>
-        <li>段落和换行</li>
-      </ul>
-    </div>
   </div>
 
   <script src="app.js"></script>

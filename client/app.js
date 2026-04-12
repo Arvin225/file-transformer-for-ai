@@ -26,8 +26,10 @@ function updateFileInput() {
   fileInput.accept = config.accept;
   
   // 更新提示文字
-  const fileTypesText = document.querySelector('.file-types');
-  fileTypesText.textContent = `支持 ${config.accept} 格式`;
+  const fileTypesText = document.getElementById('fileTypeHint');
+  if (fileTypesText) {
+    fileTypesText.textContent = `支持 ${config.accept} 格式`;
+  }
 }
 
 // 初始化
