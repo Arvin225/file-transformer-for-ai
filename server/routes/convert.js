@@ -7,6 +7,7 @@ const { cleanup } = require('../utils/fileCleanup');
 const { convertWordToFormat } = require('../converters/wordConverter');
 const { convertExcelToMarkdown } = require('../converters/excelConverter');
 const { convertCsvToMarkdown } = require('../converters/csvConverter');
+const { convertMdToText } = require('../converters/mdToTxtConverter');
 
 const router = express.Router();
 
@@ -34,6 +35,8 @@ router.post('/', upload.single('file'), async (req, res) => {
     } else if (format === 'csv-md') {
       const markdown = await convertCsvToMarkdown(inputPath);
       result = { type: 'md', content: markdown, ext: '.md' };
+    } else if (format === 'md-txt') {
+      result = await convertMdToText(inputPath);
     } else {
       throw new Error('不支持的格式');
     }

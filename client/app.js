@@ -9,7 +9,8 @@ const formatConfig = {
   'word-md': { accept: '.docx,.doc', ext: '.md', name: 'Word' },
   'word-html': { accept: '.docx,.doc', ext: '.html', name: 'Word' },
   'excel-md': { accept: '.xlsx,.xls', ext: '.md', name: 'Excel' },
-  'csv-md': { accept: '.csv', ext: '.md', name: 'CSV' }
+  'csv-md': { accept: '.csv', ext: '.md', name: 'CSV' },
+  'md-txt': { accept: '.md,.markdown', ext: '.txt', name: 'Markdown' }
 };
 
 // 点击上传
