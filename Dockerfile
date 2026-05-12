@@ -8,6 +8,9 @@ COPY package*.json ./
 # 安装依赖
 RUN npm ci --only=production
 
+# 创建上传和输出目录
+RUN mkdir -p /app/uploads /app/output
+
 # 复制所有源代码
 COPY . .
 

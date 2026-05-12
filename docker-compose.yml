@@ -5,9 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: file-transformer-for-ai
+    container_name: file-transformer
     ports:
-      - "3000:3000"
+      - "3300:3000"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
